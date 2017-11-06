@@ -91,6 +91,15 @@ class boardTests {
 		
 	}
 	
+	@Test
+	void testSpecificRowIsFull() {
+		mainBoard.insert('O', 6);
+		mainBoard.insert('X', 7);
+		mainBoard.insert('X', 8);
+		
+		assertTrue(mainBoard.isFull(mainBoard.ROW, 3));
+	}
+	
 
 	
 	
