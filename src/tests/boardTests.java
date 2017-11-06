@@ -1,14 +1,21 @@
 package tests;
+import java.lang.IllegalArgumentException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
 import ticTacToe.Board;
 
 class boardTests {
 	Board mainBoard;
+	
+	
+    
 	@BeforeEach
 	void setUp() throws Exception {
 		mainBoard = new Board();
@@ -109,6 +116,34 @@ class boardTests {
 		assertTrue(mainBoard.isFull(mainBoard.COLUMN, 2));
 	}
 	
+	
+	@Test
+	void testBoardIsFull() {
+		mainBoard.insert('X', 1);
+		mainBoard.insert('O', 4);
+		mainBoard.insert('O', 6);
+		mainBoard.insert('X', 7);
+		mainBoard.insert('X', 8);
+		mainBoard.insert('O', 2);
+		mainBoard.insert('X', 3);
+		mainBoard.insert('O', 5);
+		mainBoard.insert('X', 0);
+		
+		assertTrue(mainBoard.boardFull());
+	}
+	
+	
+	@Test()
+	void testGetSectionReturnsException() {
+		try {
+			mainBoard.getSection("BAD ARGUMENT", 1);
+			fail("IllegalArgumentException never thrown");
+		}
+		catch(IllegalArgumentException e) {
+			String message = e.getMessage();
+			assertEquals("Section BAD ARGUMENT does not exist", message);
+		}
+	}
 
 	
 	
