@@ -144,6 +144,42 @@ class boardTests {
 			assertEquals("Section BAD ARGUMENT does not exist", message);
 		}
 	}
+	
+	@Test()
+	void testGetRowReturnsException() {
+		try {
+			mainBoard.getRow(0);
+			fail("IndexOutOfBoundsException never thrown");
+		}
+		catch(IndexOutOfBoundsException e) {
+			String message = e.getMessage();
+			assertEquals("Index " + "0" + " not valid, 1-3 are acceptable row indexes", message);
+		}
+	}
+	
+	@Test()
+	void testGetColumnReturnsException() {
+		try {
+			mainBoard.getColumn(0);
+			fail("IndexOutOfBoundsException never thrown");
+		}
+		catch(IndexOutOfBoundsException e) {
+			String message = e.getMessage();
+			assertEquals("Index " + "0" + " not valid, 1-3 are acceptable column indexes", message);
+		}
+	}
+	
+	@Test()
+	void testGetDiagonalReturnsException() {
+		try {
+			mainBoard.getDiagonal(4);
+			fail("IndexOutOfBoundsException never thrown");
+		}
+		catch(IndexOutOfBoundsException e) {
+			String message = e.getMessage();
+			assertEquals("Index " + "4" + " not valid, 1-2 are acceptable diagonal indexes", message);
+		}
+	}
 
 	
 	
