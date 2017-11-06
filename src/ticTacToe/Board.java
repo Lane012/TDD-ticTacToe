@@ -1,6 +1,7 @@
 package ticTacToe;
 
 import java.util.Arrays;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 
 public class Board {
@@ -45,7 +46,7 @@ public class Board {
 			return getColumn(index);
 		}
 		else {
-			return null;
+			throw new IllegalArgumentException("Section " + section + " does not exist");
 		}	
 	}
 	
@@ -59,7 +60,7 @@ public class Board {
 				return new Character[] {board[6], board[7], board[8]};
 			
 			default:
-				return null;
+				throw new IndexOutOfBoundsException("Index " + row + " not valid, 1-3 are acceptable row indexes");
 		}
 	}
 	
@@ -73,7 +74,18 @@ public class Board {
 				return new Character[] {board[2], board[5], board[8]};
 			
 			default:
-				return null;
+				throw new IndexOutOfBoundsException("Index " + column + " not valid, 1-3 are acceptable column indexes");
+		}
+	}
+	
+	public Character[] getDiagonal(int diagonal) {
+		switch (diagonal) {
+			case 1:
+				return new Character[] {board[0], board[4], board[8]};
+			case 2:
+				return new Character[] {board[2], board[4], board[6]};
+			default:
+				throw new IndexOutOfBoundsException("Index " + diagonal + " not valid, 1-2 are acceptable diagonal indexes");
 		}
 	}
 	
@@ -92,11 +104,19 @@ public class Board {
 	
 	public boolean isFull(String section, int index) {
 		List<Character> list = null;
-		if(section == "ROW") {
-			list  = Arrays.asList(getRow(index));
-		}
-		else if(section == "COLUMN") {
-			list = Arrays.asList(getColumn(index));
+		
+		switch (section) {
+			case "ROW": 
+				list  = Arrays.asList(getRow(index));
+				break;
+			case "COLUMN":
+				list = Arrays.asList(getColumn(index));
+				break;
+			case "DIAGONAL":
+				list = Arrays.asList(getDiagonal(index));
+				break;
+			default:
+				throw new IllegalArgumentException("Section " + section + " does not exist");
 		}
 		
 		if(list != null) {
@@ -104,8 +124,14 @@ public class Board {
 		}
 		
 		return false;
+	}
 		
-		
-		
+	
+	public boolean boardFull() {
+		if(Arrays.asList(board).contains('E')) {
+			return false;
+		}
+		return true;
+	
 	}
 }
