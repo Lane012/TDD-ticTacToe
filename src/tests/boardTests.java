@@ -100,6 +100,15 @@ class boardTests {
 		assertTrue(mainBoard.isFull(mainBoard.ROW, 3));
 	}
 	
+	@Test
+	void testSpecificColumnIsFull() {
+		mainBoard.insert('X', 1);
+		mainBoard.insert('O', 4);
+		mainBoard.insert('X', 7);
+		
+		assertTrue(mainBoard.isFull(mainBoard.COLUMN, 2));
+	}
+	
 
 	
 	
