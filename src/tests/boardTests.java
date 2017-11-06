@@ -180,6 +180,15 @@ class boardTests {
 			assertEquals("Index " + "4" + " not valid, 1-2 are acceptable diagonal indexes", message);
 		}
 	}
+	
+	@Test()
+	void testDiagonalIsFull() {
+		mainBoard.insert('X', 0);
+		mainBoard.insert('X', 4);
+		mainBoard.insert('X', 8);
+		
+		assertTrue(mainBoard.isFull(mainBoard.DIAGONAL, 1));
+	}
 
 	
 	
